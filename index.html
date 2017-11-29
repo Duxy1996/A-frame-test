@@ -3,7 +3,8 @@
     <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene log="Im the scene">  
+    <a-scene onmousedown="WhichButton(event)" log="Im the scene">
+      <a-box position="0 7.5 0" rotation="0 0 0" width="10" height="1" color="#FFC65D"></a-box>  
       <a-plane position="0 0 -15" rotation="-90 0 0" width="8" height="30" color="#7BC8A4"></a-plane>
       <a-sky id="sky" color="#ECECEC"></a-sky>
     </a-scene>

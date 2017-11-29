@@ -25,9 +25,14 @@ for (i = 0; i < 10; i++) {
     sceneEl.appendChild(entityEl);
 }
 
-function WhichButton(event) {
-    console.log("Go forward")
-    xx = xx - 1
+function WhichButton(event) {   
     camera = sceneEl.querySelector('#camera');
-    camera.setAttribute('position', {x: 0, y: 3.75, z: xx});
+    console.log(camera.components.rotation.data.y)
+    //console.log(Math.sin(camera.components.rotation.data.x))
+    //console.log(Math.cos(camera.components.rotation.data.x))
+    //console.log(camera.components.rotation.data.x)
+    zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180)
+    xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180)
+    //console.log(camera.components.position.attrValue.z)
+    camera.setAttribute('position', {x: xx, y: 3.75, z: zz});
 }

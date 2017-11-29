@@ -1,6 +1,7 @@
-
+var xx = 0
 var sceneEl = document.querySelector('a-scene');
-
+camera = sceneEl.querySelector('#camera');
+camera.setAttribute('position', {x: 0, y: 3.75, z: 0});
 
 for (i = 0; i < 10; i++) { 
     var entityEl = document.createElement('a-cylinder');
@@ -25,5 +26,8 @@ for (i = 0; i < 10; i++) {
 }
 
 function WhichButton(event) {
-    alert("You pressed button: " + event.button)
+    console.log("Go forward")
+    xx = xx - 1
+    camera = sceneEl.querySelector('#camera');
+    camera.setAttribute('position', {x: 0, y: 3.75, z: xx});
 }

@@ -7,10 +7,14 @@
 
   </head>
   <body>
-    <a-scene>
+    <a-scene onmousedown="WhichButton(event)">
       <a-assets>      
         <a-asset-item id="dawningFont" src="./fonts/VarelaRound_Regular.json"></a-asset-item>        
       </a-assets>
+      <a-entity camera look-controls id="camera">
+        <a-entity geometry="primitive: plane; height: 0; width: 0" position="0 0 -1"
+                  material="color: gray; opacity: 0.5"></a-entity>
+      </a-entity> 
       <a-sky id="sky" color="#CFEBFD"></a-sky>
     </a-scene>
   <script  src="js/index_pc.js"></script>

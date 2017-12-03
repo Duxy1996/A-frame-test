@@ -1,31 +1,19 @@
 <html>
   <head>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
     <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+
   </head>
   <body>
-    <a-scene onmousedown="WhichButton(event)" log="Im the scene">
-
-      <a-assets>
-        <img id="pink" src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg" crossorigin="anonymous" />        
-        <a-asset-item id="dawningFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2FdawningOfANewDayRegular.typeface.json?1490305922844"></a-asset-item>        
+    <a-scene>
+      <a-assets>      
+        <a-asset-item id="dawningFont" src="./fonts/VarelaRound_Regular.json"></a-asset-item>        
       </a-assets>
-
-      <a-entity camera look-controls id="camera">
-        <a-entity geometry="primitive: plane; height: 0; width: 0" position="0 0 -1"
-                  material="color: gray; opacity: 0.5"></a-entity>
-      </a-entity>      
-      <a-entity
-        rotation="0 0 5"
-        position="0 2 16"
-        text-geometry="value: Virtual Reality; font: #dawningFont; bevelEnabled: true; bevelSize: 0.05; bevelThickness: 0.05; curveSegments: 12; size: 1; height: 0;"
-        material="color:lavenderblush; metalness:1; roughness: 0; sphericalEnvMap: #pink;"
-      ></a-entity>           
-      <a-box position="0 7.5 0" rotation="0 0 0" width="10" height="1" color="#FFC65D"></a-box>  
-      <a-plane position="0 0 -15" rotation="-90 0 0" width="8" height="30" color="#7BC8A4"></a-plane>
-      <a-sky id="sky" color="#ECECEC"></a-sky>
+      <a-sky id="sky" color="#CFEBFD"></a-sky>
     </a-scene>
-  <script  src="js/index.js"></script>
+  <script  src="js/index_pc.js"></script>
   </body>
 </html>
+

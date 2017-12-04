@@ -7,14 +7,23 @@
 
   </head>
   <body>
-    <a-scene onmousedown="WhichButton(event)">
-      <a-assets>      
+    <a-scene onmousedown="WhichButton(event)" log="Im the scene">
+      <a-assets> 
+        <img id="platform" src="./assets/fg.jpg"> 
+        <img id="piedra" src="./assets/pie.jpg"> 
+        <a-asset-item id="object" src="models/model.obj"></a-asset-item>   
+        <a-asset-item id="moon" src="models/moon.obj"></a-asset-item>
         <a-asset-item id="dawningFont" src="./fonts/VarelaRound_Regular.json"></a-asset-item>        
       </a-assets>
-      <a-entity camera look-controls id="camera">
+      <a-entity camera look-controls id="camera" position="0 -1 5">
         <a-entity geometry="primitive: plane; height: 0; width: 0" position="0 0 -1"
                   material="color: gray; opacity: 0.5"></a-entity>
-      </a-entity> 
+      </a-entity>
+
+      <a-obj-model scale="2 2 2" position="-15 1 0" src="#object" ></a-obj-model>
+      <a-obj-model scale="2 2 2" position="-30 1 -5" src="#object" ></a-obj-model>
+      <a-obj-model scale="2 2 2" position="-30 10 -5" src="#moon" ></a-obj-model>
+
       <a-sky id="sky" color="#CFEBFD"></a-sky>
     </a-scene>
   <script  src="js/index_pc.js"></script>

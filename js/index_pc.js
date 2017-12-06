@@ -3,7 +3,7 @@ var rocket_he = 3.75
 
 var sceneEl = document.querySelector('a-scene');
 camera = sceneEl.querySelector('#camera');
-camera.setAttribute('position', {x: 0, y: 3.75, z: 0});
+camera.setAttribute('position', {x: 0, y: 1.5, z: 5});
 
 var extendDeep = AFRAME.utils.extendDeep;
 var meshMixin = AFRAME.primitives.getMeshMixin();
@@ -78,8 +78,8 @@ function pilar(x,y,z) {
   var box = document.createElement('a-box');
   box.setAttribute('geometry', {
     height:0.6,
-    width: 1,
-    depth: 1
+    width: 1.1,
+    depth: 1.1
   });
   box.setAttribute('position', {x: x, y: 0.3 + y, z: z});
   box.setAttribute('material', 'color', '#C6B566');
@@ -160,7 +160,7 @@ function WhichButton(event) {
     console.log(camera.components.rotation.data.y)
     zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180)
     xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180)
-    camera.setAttribute('position', {x: xx, y: 3.75, z: zz});
+    camera.setAttribute('position', {x: xx, y: 1.5, z: zz});
 }
 
 

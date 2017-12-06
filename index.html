@@ -11,6 +11,7 @@
       <a-assets> 
         <img id="platform" src="./assets/fg.jpg"> 
         <img id="piedra" src="./assets/pie.jpg"> 
+        <img id="sky" src="./assets/sky.jpg"> 
         <a-asset-item id="object" src="models/model.obj"></a-asset-item>   
         <a-asset-item id="moon" src="models/moon.obj"></a-asset-item>
         <a-asset-item id="dawningFont" src="./fonts/VarelaRound_Regular.json"></a-asset-item>        
@@ -20,11 +21,11 @@
                   material="color: gray; opacity: 0.5"></a-entity>
       </a-entity>
 
-      <a-obj-model scale="2 2 2" position="-15 1 0" src="#object" ></a-obj-model>
-      <a-obj-model scale="2 2 2" position="-30 1 -5" src="#object" ></a-obj-model>
+      <a-obj-model shadow scale="2 2 2" position="-15 1 0" src="#object" ></a-obj-model>
+      <a-obj-model shadow scale="2 2 2" position="-30 1 -5" src="#object" ></a-obj-model>
       <a-obj-model scale="2 2 2" position="-30 10 -5" src="#moon" ></a-obj-model>
 
-      <a-sky id="sky" color="#CFEBFD"></a-sky>
+      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
     </a-scene>
   <script  src="js/index_pc.js"></script>
   </body>

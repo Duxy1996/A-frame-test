@@ -1,5 +1,4 @@
-var xx = 0
-var rocket_he = 3.75
+var time = 0
 
 var sceneEl = document.querySelector('a-scene');
 camera = sceneEl.querySelector('#camera');
@@ -73,6 +72,7 @@ function pilar(x,y,z) {
   });
   column.setAttribute('position', {x: x, y: 3.75 + y, z: z});
   column.setAttribute('src', '#piedra');
+  column.setAttribute('shadow','cast','true');
   sceneEl.appendChild(column);
 
   var box = document.createElement('a-box');
@@ -83,6 +83,7 @@ function pilar(x,y,z) {
   });
   box.setAttribute('position', {x: x, y: 0.3 + y, z: z});
   box.setAttribute('material', 'color', '#C6B566');
+  box.setAttribute('shadow','cast','true');
   sceneEl.appendChild(box);
 
   var cone = document.createElement('a-cone');
@@ -93,6 +94,7 @@ function pilar(x,y,z) {
   cone.setAttribute('position', {x: x, y: 7 + y, z: z});
   cone.setAttribute('material', 'color', '#C6B566');
   cone.setAttribute('rotation', {x: 180, y: 0, z: 0});
+  cone.setAttribute('shadow','cast','true');
   sceneEl.appendChild(cone);
 
   box = document.createElement('a-box');
@@ -103,6 +105,7 @@ function pilar(x,y,z) {
   });
   box.setAttribute('position', {x: x, y: 7.75 + y, z: z});
   box.setAttribute('material', 'color', '#C6B566');
+  box.setAttribute('shadow','cast','true');
   sceneEl.appendChild(box);
 
 }
@@ -128,6 +131,8 @@ roof.setAttribute('geometry', {
 roof.setAttribute('rotation', {x: 0, y: 0, z: 225});
 roof.setAttribute('position', {x: 10.75, y: 8, z: -24});
 roof.setAttribute('material', 'color', '#FFC65D');
+roof.setAttribute('shadow','cast','true');
+roof.setAttribute('shadow','receive','true');
 sceneEl.appendChild(roof);
 
 roof = document.createElement('a-prism');
@@ -141,26 +146,26 @@ roof.setAttribute('position', {x: 10.75, y: 8.01, z: +0.01});
 roof.setAttribute('material', 'color', '#FFC65D');
 sceneEl.appendChild(roof);
 
-ground(0,0,-30,-90,100)
-function ground(x,y,z,e,size) {
+ground(10,0,-30,-90)
+
+function ground(x,y,z,e) {
   var entityEl = document.createElement('a-plane');
   entityEl.setAttribute('geometry', {
-    width: size,
-    height: size
+    width: 40,
+    height: 70
   });  
-  console.log(y);
-  entityEl.setAttribute('rotation', {x: e, y: 90, z: 0});
+  entityEl.setAttribute('rotation', {x: e, y: 0, z: 0});
   entityEl.setAttribute('position', {x: x, y: y, z: z});
   entityEl.setAttribute('material', 'color', '#8C6B21');
+  entityEl.setAttribute('shadow','receive','true');
   sceneEl.appendChild(entityEl);
 }
 
-function WhichButton(event) {   
-    camera = sceneEl.querySelector('#camera');
-    console.log(camera.components.rotation.data.y)
-    zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180)
-    xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180)
-    camera.setAttribute('position', {x: xx, y: 1.5, z: zz});
+function WhichButton(event) { 
+  camera = sceneEl.querySelector('#camera');
+  zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180);
+  xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180);
+  camera.setAttribute('position', {x: xx, y: 1.5, z: zz});
 }
 
 
@@ -175,3 +180,9 @@ friso.setAttribute('rotation', {x: 0, y: 0, z: 0});
 friso.setAttribute('position', {x: 10.75, y: 9.7, z: 1.1});
 friso.setAttribute('src', '#platform');
 sceneEl.appendChild(friso);
+
+setInterval(function(){
+  light = sceneEl.querySelector('#light');
+  xx = light.components.position.attrValue.x + 0.003;
+  light.setAttribute('position', {x: xx, y: 7, z: 9});
+}, 30);

@@ -18,10 +18,10 @@
         <a-entity geometry="primitive: plane; height: 0; width: 0" position="0 0 -1"
                   material="color: gray; opacity: 0.5"></a-entity>
       </a-entity>
-      <a-entity scale="0.0035 0.0035 0.0035" shadow="cast: true; receive: true;" position="10 0 -30" obj-model="obj: #atenea;"></a-entity>
+      <a-entity scale="0.0035 0.0035 0.0035" shadow="cast: true; receive: true;" position="10 1 -30" obj-model="obj: #atenea;"></a-entity>
 
-      <a-entity id="light_base" rotation="-80 0 0" light="type: spot; angle: 25; castShadow:true;" position="10 8.125 -29"></a-entity>
-
+      <a-entity id="light_base" rotation="-80 0 0" light="type: spot; angle: 25; castShadow:true;" position="10 9.125 -29"></a-entity>
+      <a-entity id="light_base-2" rotation="-20 -30 0" light="angle:40;intensity:0.6;type:spot;castShadow:true" position="4.476 8.53 -8.188"></a-entity>
       <a-entity id="light" position="-6 7 9" light="shadowCameraBottom: -10; shadowCameraTop: 40; shadowMapWidth: 1024; shadowMapHeight: 1024; shadowCameraNear: -10; shadowCameraLeft: -20; shadowCameraRight: 40; castShadow: true"  ></a-entity>
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
     </a-scene>

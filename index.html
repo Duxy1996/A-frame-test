@@ -3,10 +3,10 @@
     <meta charset="UTF-8">
     <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
-
+    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
   </head>
   <body>
-    <a-scene onmousedown="WhichButton(event)" light="defaultLightsEnabled: false">
+    <a-scene onmousedown="WhichButton(event)" light="defaultLightsEnabled: false" physics="debug: false">
       <a-assets> 
         <img id="platform" src="./assets/fg.jpg"> 
         <img id="piedra" src="./assets/pie.jpg"> 
@@ -22,9 +22,11 @@
 
       <a-entity id="light_base" rotation="-80 0 0" light="type: spot; angle: 25; castShadow:true;" position="10 9.125 -29"></a-entity>
       <a-entity id="light_base-2" rotation="-20 -30 0" light="angle:40;intensity:0.6;type:spot;castShadow:true" position="4.476 8.53 -8.188"></a-entity>
+      <a-entity cloth="width: 4; height: 8;" position="-5 3 0"></a-entity>
       <a-entity id="light" position="-6 7 9" light="shadowCameraBottom: -10; shadowCameraTop: 40; shadowMapWidth: 1024; shadowMapHeight: 1024; shadowCameraNear: -10; shadowCameraLeft: -20; shadowCameraRight: 40; castShadow: true"  ></a-entity>
       <a-sky src="#sky" rotation="0 -90 0"></a-sky>
     </a-scene>
+  <script  src="js/prism_three.js"></script>  
   <script  src="js/index_pc.js"></script>
   </body>
 </html>

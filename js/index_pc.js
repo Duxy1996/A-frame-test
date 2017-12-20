@@ -1,72 +1,15 @@
 var sceneEl = document.querySelector('a-scene');
+var index   = 0;
 camera = sceneEl.querySelector('#camera');
 camera.setAttribute('position', {x: 0, y: 1.5, z: 5});
 
 var extendDeep = AFRAME.utils.extendDeep;
 var meshMixin = AFRAME.primitives.getMeshMixin();
 
-AFRAME.registerGeometry('prism', {
-  schema: {
-    depth: {default: 1, min: 0},
-    height: {default: 1, min: 0},
-    width: {default: 1, min: 0},
-    segmentsHeight: {default: 1, min: 1, max: 20, type: 'int'},
-    segmentsWidth: {default: 1, min: 1, max: 20, type: 'int'},
-    segmentsDepth: {default: 1, min: 1, max: 20, type: 'int'}
-  },
-  init: function (data) {
-    var triangleGeometry = new THREE.Geometry();
-    triangleGeometry.vertices = [
-    new THREE.Vector3(-data.width,  data.width, data.depth/2),  //0 
-    new THREE.Vector3(-data.width * data.height, -data.width * data.height, data.depth/2),  //1
-    new THREE.Vector3( data.width, -data.width, data.depth/2),  //2
-    new THREE.Vector3(-data.width,  data.width, -data.depth/2), //3
-    new THREE.Vector3(-data.width * data.height, -data.width * data.height, -data.depth/2), //4
-    new THREE.Vector3( data.width, -data.width, -data.depth/2)];//5
-
-    triangleGeometry.faces = [
-    new THREE.Face3(0, 1, 2),
-    new THREE.Face3(3, 5, 4),
-
-    new THREE.Face3(0, 2, 5),
-    new THREE.Face3(0, 5, 3),
-
-    new THREE.Face3(0, 3, 1),
-    new THREE.Face3(1, 3, 4),
-    
-    new THREE.Face3(1, 4, 2),
-    new THREE.Face3(4, 5, 2),
-    ];
-
-
-    triangleGeometry.mergeVertices();
-    triangleGeometry.computeFaceNormals();
-    triangleGeometry.computeVertexNormals();
-
-    this.geometry = triangleGeometry;
-  }
-});
-
-var extendDeep = AFRAME.utils.extendDeep;
-var meshMixin = AFRAME.primitives.getMeshMixin();
-
-AFRAME.registerPrimitive('a-prism', extendDeep({}, meshMixin, {
-  defaultComponents: {
-    geometry: {primitive: 'prism'}
-  },
-  
-  mappings: {
-    depth: 'geometry.depth',
-    height: 'geometry.height',
-    width: 'geometry.width'
-  }
-}));
-
 function WhichButton(event) { 
   camera = sceneEl.querySelector('#camera');
   zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180);
   xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180);
-  console.log(xx,zz)
   if(((xx > -2.5)&&(xx<23.5))&&(zz < 1.95)){    
     camera.setAttribute('position', {x: xx, y: 1.85, z: zz});
     if(zz < (1.95 - 0.5)){
@@ -81,23 +24,24 @@ function WhichButton(event) {
   }
 }
 
-setInterval(function(){
-  light = sceneEl.querySelector('#light');
-  xx = light.components.position.attrValue.x + 0.003;
-  light.setAttribute('position', {x: xx, y: 7, z: 9});
-}, 30);
+//setInterval(function(){
+//  light = sceneEl.querySelector('#light');
+//  xx = light.components.position.attrValue.x + 0.003;
+//  light.setAttribute('position', {x: xx, y: 7, z: 9});
+//}, 30);
 
 function ground(x,y,z,e,w,h) {
-  var entityEl = document.createElement('a-plane');
-  entityEl.setAttribute('geometry', {
+  var ground = document.createElement('a-plane');
+  ground.setAttribute('geometry', {
     width: w,
     height: h
   });  
-  entityEl.setAttribute('rotation', {x: e, y: 0, z: 0});
-  entityEl.setAttribute('position', {x: x, y: y, z: z});
-  entityEl.setAttribute('material', 'color', '#8C6B21');
-  entityEl.setAttribute('shadow','receive','true');
-  sceneEl.appendChild(entityEl);
+  ground.setAttribute('static-body',{sphereRadius: NaN});
+  ground.setAttribute('rotation', {x: e, y: 0, z: 0});
+  ground.setAttribute('position', {x: x, y: y, z: z});
+  ground.setAttribute('material', 'color', '#8C6B21');
+  ground.setAttribute('shadow','receive','true');
+  sceneEl.appendChild(ground);
 }
 
 function friso(x,y,z){
@@ -126,6 +70,7 @@ function roof(x,y,z){
   roof.setAttribute('material', 'color', '#FFC65D');
   roof.setAttribute('shadow','cast','true');
   roof.setAttribute('shadow','receive','true');
+  roof.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(roof);
 
   roof = document.createElement('a-prism');
@@ -137,6 +82,7 @@ function roof(x,y,z){
   roof.setAttribute('rotation', {x: 0, y: 0, z: 225});
   roof.setAttribute('position', {x: 10.75 + x, y: 8.01 + y, z: +0.01 + z});
   roof.setAttribute('material', 'color', '#FFC65D');
+  roof.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(roof);
 }
 
@@ -149,6 +95,7 @@ function column(x,y,z) {
   column.setAttribute('position', {x: x, y: 3.75 + y, z: z});
   column.setAttribute('src', '#piedra');
   column.setAttribute('shadow','cast','true');
+  column.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(column);
 
   var box = document.createElement('a-box');
@@ -160,6 +107,7 @@ function column(x,y,z) {
   box.setAttribute('position', {x: x, y: 0.3 + y, z: z});
   box.setAttribute('material', 'color', '#C6B566');
   box.setAttribute('shadow','cast','true');
+  box.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(box);
 
   var cone = document.createElement('a-cone');
@@ -171,6 +119,7 @@ function column(x,y,z) {
   cone.setAttribute('material', 'color', '#C6B566');
   cone.setAttribute('rotation', {x: 180, y: 0, z: 0});
   cone.setAttribute('shadow','cast','true');
+  cone.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(cone);
 
   box = document.createElement('a-box');
@@ -199,13 +148,6 @@ function columns(x,y,z){
   }
 }
 
-function partenon(x,y,z){
-  friso(x,y+1,z);
-  roof(x,y+1,z);
-  columns(x,y+1,z);
-  floor_part(x,y,z)
-}
-
 function floor_part(x,y,z){
   var box = document.createElement('a-box');
   box.setAttribute('geometry', {
@@ -216,6 +158,7 @@ function floor_part(x,y,z){
   box.setAttribute('position', {x: x + 11, y: 0.25 + y, z: z - 24});
   box.setAttribute('material', 'color', '#C6B566');
   box.setAttribute('shadow','cast','true');
+  box.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(box);
 
   var box = document.createElement('a-box');
@@ -227,6 +170,7 @@ function floor_part(x,y,z){
   box.setAttribute('position', {x: x + 11, y: 0.63 + y, z: z - 24});
   box.setAttribute('material', 'color', '#C6B566');
   box.setAttribute('shadow','cast','true');
+  box.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(box);
 
   var box = document.createElement('a-box');
@@ -238,10 +182,39 @@ function floor_part(x,y,z){
   box.setAttribute('position', {x: x + 11, y: 0.96 + y, z: z - 24});
   box.setAttribute('material', 'color', '#C6B566');
   box.setAttribute('shadow','cast','true');
+  box.setAttribute('static-body',{sphereRadius: NaN});
   sceneEl.appendChild(box);
+}
+
+
+function partenon(x,y,z){
+  friso(x,y+1,z);
+  roof(x,y+1,z);
+  columns(x,y+1,z);
+  floor_part(x,y,z)
 }
 
 partenon(0,0,0);
 ground(10,0.1,7,-90,40,10);
 ground(-2.5,0.1,-3,-90,15,10);
 ground(+0.5,0.1,-13-16,-90,15,42);
+ground(+25,0.1,-13-20,-90,30,70);
+ground(1.5,0.1,-59,-90,17,18);
+
+
+setInterval(function(){
+  for (i = index ; i < 2+index; i++) { 
+    var rain = document.createElement('a-sphere');
+    rain.setAttribute('geometry', {
+      radius:0.25,
+    });
+    //rain.setAttribute('scale', {x: 0.1,y: 0.1,z:0.1});
+    rain.setAttribute('id',"ball"+i);
+    rain.setAttribute('position', {x: -6 + Math.random()*30, y: 20, z: -Math.random()*60});
+    rain.setAttribute('material', 'color', '#7F7FFF');
+    rain.setAttribute('shadow','cast','true');
+    rain.setAttribute('dynamic-body',{sphereRadius: NaN});
+    sceneEl.appendChild(rain);
+  }
+  index = index + 2
+}, 100);

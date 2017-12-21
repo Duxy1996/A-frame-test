@@ -1,4 +1,3 @@
-
 AFRAME.registerGeometry('prism', {
   schema: {
     depth: {default: 1, min: 0},

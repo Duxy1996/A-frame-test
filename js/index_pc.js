@@ -1,5 +1,6 @@
 var sceneEl = document.querySelector('a-scene');
 var index   = 0;
+var index_two   = 0;
 camera = sceneEl.querySelector('#camera');
 camera.setAttribute('position', {x: 0, y: 1.5, z: 5});
 
@@ -24,11 +25,11 @@ function WhichButton(event) {
   }
 }
 
-//setInterval(function(){
-//  light = sceneEl.querySelector('#light');
-//  xx = light.components.position.attrValue.x + 0.003;
-//  light.setAttribute('position', {x: xx, y: 7, z: 9});
-//}, 30);
+setInterval(function(){
+  light = sceneEl.querySelector('#light');
+  xx = light.components.position.attrValue.x + 0.003;
+  light.setAttribute('position', {x: xx, y: 7, z: 9});
+}, 30);
 
 function ground(x,y,z,e,w,h) {
   var ground = document.createElement('a-plane');
@@ -186,12 +187,27 @@ function floor_part(x,y,z){
   sceneEl.appendChild(box);
 }
 
+function wall(){
+  var box = document.createElement('a-box');
+  box.setAttribute('geometry', {
+    height: 5,
+    width: 2,
+    depth: 60
+  });
+  box.setAttribute('position', {x: -7.5, y: 0, z:-25});
+  box.setAttribute('rotation', {x: 0, y: -8, z:0});
+  box.setAttribute('material', 'color', '#C6B566');
+  box.setAttribute('shadow','cast','true');
+  box.setAttribute('static-body',{sphereRadius: NaN});
+  sceneEl.appendChild(box);
+}
 
 function partenon(x,y,z){
   friso(x,y+1,z);
   roof(x,y+1,z);
   columns(x,y+1,z);
-  floor_part(x,y,z)
+  floor_part(x,y,z);
+  wall();
 }
 
 partenon(0,0,0);
@@ -202,19 +218,7 @@ ground(+25,0.1,-13-20,-90,30,70);
 ground(1.5,0.1,-59,-90,17,18);
 
 
-setInterval(function(){
-  for (i = index ; i < 2+index; i++) { 
-    var rain = document.createElement('a-sphere');
-    rain.setAttribute('geometry', {
-      radius:0.25,
-    });
-    //rain.setAttribute('scale', {x: 0.1,y: 0.1,z:0.1});
-    rain.setAttribute('id',"ball"+i);
-    rain.setAttribute('position', {x: -6 + Math.random()*30, y: 20, z: -Math.random()*60});
-    rain.setAttribute('material', 'color', '#7F7FFF');
-    rain.setAttribute('shadow','cast','true');
-    rain.setAttribute('dynamic-body',{sphereRadius: NaN});
-    sceneEl.appendChild(rain);
-  }
-  index = index + 2
-}, 100);
+
+
+
+

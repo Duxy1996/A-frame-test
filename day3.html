@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+  </head>
+  <body>
+    <a-scene light="defaultLightsEnabled: true" physics="debug: false">
+      <a-assets> 
+        <img id="sky" src="./assets/space.jpg">
+        <a-asset-item id="shuttle" src="./models/shuttle.obj"></a-asset-item>  
+        <a-asset-item id="shuttle_src" src="./models/textures/shuttle.mtl"></a-asset-item>     
+        <a-asset-item id="shuttlecabin" src="./models/cabinshuttle.obj"></a-asset-item>  
+        <a-asset-item id="shuttlecabin_src" src="./models/textures/cabinshuttle.mtl"></a-asset-item>         
+      </a-assets>
+      <a-entity id="camera" camera look-controls wasd-controls position="0 -1 5">
+        <a-entity geometry="primitive: plane; height: 1; width: 1" position="0 -0.9 -1"
+                  material="color: gray; opacity: 1"></a-entity>
+        <a-entity geometry="primitive: plane; height: 1; width: 1" rotation="0 0 30" position="1 -0.9 -1"
+                  material="color: gray; opacity: 1"></a-entity>
+        <a-entity geometry="primitive: plane; height: 1; width: 1" rotation="0 0 -30" position="-1 -0.9 -1"
+                  material="color: gray; opacity: 1"></a-entity>
+
+        <a-entity geometry="primitive: sphere; height: 1; width: 1" rotation="0 0 -30" position="-5 5 1"
+                  material="color: red; opacity: 1"></a-entity>
+        <a-entity geometry="primitive: sphere; height: 1; width: 1" rotation="0 0 -30" position="5  5 1"
+                  material="color: red; opacity: 1"></a-entity>
+      </a-entity>
+        <a-entity geometry="primitive: plane; height: 0; width: 0" position="0 0 -1"
+                  material="color: gray; opacity: 0.5"></a-entity>
+      </a-entity>
+      <a-entity scale="0.5 0.5 0.5" rotation="-90 0 0" shadow="cast: true; receive: true;" position="10 -10 -10" obj-model="obj: #shuttle; mtl: #shuttle_src"></a-entity>   
+
+      <a-entity scale="0.5 0.5 0.5" rotation="0 0 0" shadow="cast: true; receive: true;" position="20 -2 -10" obj-model="obj: #shuttlecabin; mtl: #shuttlecabin_src"></a-entity>  
+
+      <a-sky src="#sky" rotation="0 -90 0"></a-sky>
+    </a-scene>
+    <script  src="js/index_pc3.js"></script>
+  </body>
+</html>
+

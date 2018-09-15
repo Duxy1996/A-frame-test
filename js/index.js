@@ -18,7 +18,7 @@ blue_cube.addEventListener('click', function (evt) {
 });
 
 function rotate_tvs(tv){
-  rotation_y = 0.25*3.14159264/180;
+  rotation_y = 0.05*3.14159264/180;
   console.log(tv.getAttribute('position'));
   zz = tv.getAttribute('position').z;
   xx = tv.getAttribute('position').x;
@@ -35,4 +35,4 @@ setInterval(function(){
   rotate_tvs(orange_cube);
   rotate_tvs(green_cube);
   rotate_tvs(blue_cube);
-   }, 125);
+   }, 10);

@@ -7,11 +7,11 @@ camera.setAttribute('position', {x: 0, y: 1.5, z: 5});
 var extendDeep = AFRAME.utils.extendDeep;
 var meshMixin = AFRAME.primitives.getMeshMixin();
 
-function WhichButton(event) { 
+function WhichButton(event) {
   camera = sceneEl.querySelector('#camera');
   zz = camera.components.position.attrValue.z - Math.cos(camera.components.rotation.data.y*3.1415/180);
   xx = camera.components.position.attrValue.x - Math.sin(camera.components.rotation.data.y*3.1415/180);
-  if(((xx > -2.5)&&(xx<23.5))&&(zz < 1.95)){    
+  if(((xx > -2.5)&&(xx<23.5))&&(zz < 1.95)){
     camera.setAttribute('position', {x: xx, y: 1.85, z: zz});
     if(zz < (1.95 - 0.5)){
       camera.setAttribute('position', {x: xx, y: 2.15, z: zz});
@@ -36,7 +36,7 @@ function ground(x,y,z,e,w,h) {
   ground.setAttribute('geometry', {
     width: w,
     height: h
-  });  
+  });
   ground.setAttribute('static-body',{sphereRadius: NaN});
   ground.setAttribute('rotation', {x: e, y: 0, z: 0});
   ground.setAttribute('position', {x: x, y: y, z: z});
@@ -47,7 +47,7 @@ function ground(x,y,z,e,w,h) {
 
 function friso(x,y,z){
   var friso = document.createElement('a-triangle');
-  friso.setAttribute('geometry', {  
+  friso.setAttribute('geometry', {
     vertexA: {x: 0, y: 1.5, z: 0},
     vertexB: {x: -9, y: -1, z: 0},
     vertexC: {x: 9, y: -1, z: 0}
@@ -61,7 +61,7 @@ function friso(x,y,z){
 
 function roof(x,y,z){
   var roof = document.createElement('a-prism');
-  roof.setAttribute('geometry', {  
+  roof.setAttribute('geometry', {
     height: 0.25,
     width: 9,
     depth: 50
@@ -75,7 +75,7 @@ function roof(x,y,z){
   sceneEl.appendChild(roof);
 
   roof = document.createElement('a-prism');
-  roof.setAttribute('geometry', {  
+  roof.setAttribute('geometry', {
     height: 0.3,
     width: 9.5,
     depth: 2
@@ -136,15 +136,15 @@ function column(x,y,z) {
 }
 
 function columns(x,y,z){
-  for (i = 0 - z/3; i < 17 - z/3; i++) { 
-    column(x,y,-i*3);    
+  for (i = 0 - z/3; i < 17 - z/3; i++) {
+    column(x,y,-i*3);
   }
 
-  for (i = 0 - z/3; i < 17 - z/3; i++) { 
-    column(21.5+x,y,-i*3); 
+  for (i = 0 - z/3; i < 17 - z/3; i++) {
+    column(21.5+x,y,-i*3);
   }
 
-  for (i = 0 + x/3; i < 6 + x/3; i++) { 
+  for (i = 0 + x/3; i < 6 + x/3; i++) {
     column(3*i+3,y,z);
   }
 }
